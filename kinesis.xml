@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <!-- Github -->
+  <remote name="github"
+          fetch="https://github.com/" />
+
+  <remote name="kinesis"
+          fetch="https://github.com/ProjectKinesis"
+          revision="14" />
+
+  <remote name="kinesis-gitea"
+          fetch="https://gitea.com/clarencelol"
+          revision="14" />
+
+  <!-- Framework repos -->
+  <project path="frameworks/av" name="platform_frameworks_av" remote="kinesis" />
+  <project path="frameworks/base" name="platform_frameworks_base" remote="kinesis" />
+  <project path="frameworks/native" name="platform_frameworks_native" remote="kinesis" />
+  <project path="frameworks/opt/telephony" name="platform_frameworks_opt_telephony" remote="kinesis" />
+
+  <!-- General repos -->
+  <project path="bionic" name="platform_bionic" remote="kinesis" />
+  <project path="build/make" name="platform_build" remote="kinesis">
+    <copyfile src="core/root.mk" dest="Makefile" />
+    <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
+    <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
+    <linkfile src="core" dest="build/core" />
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh" />
+    <linkfile src="target" dest="build/target" />
+    <linkfile src="tools" dest="build/tools" />
+  </project>
+  <project path="build/soong" name="platform_build_soong" remote="kinesis" >
+    <linkfile src="root.bp" dest="Android.bp" />
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
+  </project>
+  <project path="bootable/recovery" name="platform_bootable_recovery" remote="kinesis" />
+  <project path="manifest" name="platform_manifest" remote="kinesis" />
+
+  <!-- Device repos -->
+  <project path="device/kinesis/sepolicy" name="platform_device_kinesis_sepolicy" remote="kinesis" />
+  <project path="device/qcom/sepolicy" name="platform_device_qcom_sepolicy" groups="qcom,qssi" remote="kinesis" />
+  <project path="device/qcom/sepolicy-legacy-um" name="platform_device_qcom_sepolicy" groups="qcom,sdm660" remote="kinesis" revision="14-legacy-um" />
+  <project path="device/qcom/sepolicy_vndr/legacy-um" name="platform_device_qcom_sepolicy_vndr" groups="qcom,lahaina" remote="kinesis" revision="14-legacy-um" />
+  <project path="device/qcom/sepolicy_vndr/sm8450" name="platform_device_qcom_sepolicy_vndr" groups="qcom,waipio-vendor" remote="kinesis" revision="14-caf-sm8450" />
+  <project path="device/qcom/sepolicy_vndr/sm8550" name="platform_device_qcom_sepolicy_vndr" groups="qcom,kailua-vendor" remote="kinesis" revision="14-caf-sm8550" />
+
+  <!-- External repos -->
+  <project path="external/libnl" name="platform_external_libnl" remote="kinesis" />
+  <project path="external/zstd" name="platform_external_zstd" remote="kinesis" />
+  <project path="external/mksh" name="platform_external_mksh" remote="kinesis" />
+
+  <!-- Hardware repos -->
+  <project path="hardware/google/pixel" name="platform_hardware_google_pixel" remote="kinesis" />
+  <project path="hardware/interfaces" name="platform_hardware_interfaces" remote="kinesis" />
+  <project path="hardware/libhardware" name="platform_hardware_libhardware" remote="kinesis" />
+  <project path="hardware/kinesis/compat" name="platform_hardware_kinesis_compat" remote="kinesis" />
+  <project path="hardware/qcom/wlan" name="platform_hardware_qcom_wlan" remote="kinesis" />
+  <project path="hardware/qcom-caf/common" name="platform_hardware_qcom-caf_common" groups="qcom" remote="kinesis" >
+    <!-- Add guard for AOSP hardware/qcom dir -->
+    <linkfile src="os_pickup_aosp.mk" dest="hardware/qcom/Android.mk" />
+    <!-- Add guards for CAF repositories -->
+    <linkfile src="os_pickup_sepolicy_vndr.mk" dest="device/qcom/sepolicy_vndr/SEPolicy.mk" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/msm8916/Android.mk" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/msm8952/Android.mk" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/msm8960/Android.mk" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/msm8974/Android.mk" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/msm8994/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/msm8953/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/msm8953/Android.mk" />
+    <linkfile src="os_pickup.bp" dest="hardware/qcom-caf/msm8996/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/msm8996/Android.mk" />
+    <linkfile src="os_pickup.bp" dest="hardware/qcom-caf/msm8998/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/msm8998/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sdm845/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/sdm845/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8150/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/sm8150/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8250/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/sm8250/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8350/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/sm8350/Android.mk" />
+    <linkfile src="os_pickup_audio-ar.mk" dest="hardware/qcom-caf/sm8450/audio/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8450/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/sm8450/Android.mk" />
+    <linkfile src="os_pickup_audio-ar.mk" dest="hardware/qcom-caf/sm8550/audio/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8550/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/sm8550/Android.mk" />
+  </project>
+
+  <!-- Inline kernel build -->
+  <project path="prebuilts/kernel-build-tools" name="kernel/prebuilts/build-tools" clone-depth="1" remote="aosp" revision="refs/tags/android-14.0.0_r0.17" />
+
+  <!-- Packages repos -->
+  <project path="packages/apps/Settings" name="platform_packages_apps_Settings" remote="kinesis" />
+  <project path="packages/apps/SimpleDeviceConfig" name="platform_packages_apps_SimpleDeviceConfig" remote="kinesis" />
+  <project path="packages/modules/Bluetooth" name="platform_packages_modules_Bluetooth" remote="kinesis" />
+  <project path="packages/modules/Permission" name="platform_packages_modules_Permission" remote="kinesis" />
+
+  <!-- System Repos -->
+  <project path="system/core" name="platform_system_core" remote="kinesis" />
+  <project path="system/sepolicy" name="platform_system_sepolicy" remote="kinesis" />
+  <project path="system/bpf" name="platform_system_bpf" remote="kinesis" />
+  <project path="system/update_engine" name="platform_system_update_engine" remote="kinesis" />
+
+  <!-- Vendor -->
+  <project path="vendor/kinesis" name="platform_vendor_kinesis" remote="kinesis" />
+  <project path="vendor/gms" name="platform_vendor_gms" remote="kinesis-gitea" clone-depth="1" />
+
+  <!-- Extras -->
+  <project path="external/tinyxml" name="platform_external_tinyxml" groups="pdk" remote="kinesis" />
+
+</manifest>
